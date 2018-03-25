@@ -113,7 +113,7 @@ public class CatalogActivity extends AppCompatActivity implements
         ContentValues values = new ContentValues();
         values.put(ItemEntry.COLUMN_ITEM_NAME, "Samsung");
         values.put(ItemEntry.COLUMN_ITEM_DESCRIPTION, "S6 Gold");
-        values.put(ItemEntry.COLUMN_ITEM_QUANTITY, 2);
+        values.put(ItemEntry.COLUMN_ITEM_QUANTITY, 1);
         values.put(ItemEntry.COLUMN_ITEM_PRICE, 400);
 
         // Insert a new row for Toto into the provider using the ContentResolver.

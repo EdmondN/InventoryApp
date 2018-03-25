@@ -74,7 +74,7 @@
     <string name="category_price">Price</string>
 
     <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
-    <string name="hint_item_name">Name</string>
+    <string name="hint_item_name">Product Name</string>
 
     <!-- Text hint for breed field in the editor [CHAR LIMIT=30] -->
     <string name="hint_item_description">Description</string>
