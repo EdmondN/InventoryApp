@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!-- Layout for the editor -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,34 +18,34 @@
 
         <!-- Label -->
         <TextView
-            style="@style/CategoryStyle"
-            android:text="@string/category_overview" />
+            android:text="@string/category_overview"
+            style="@style/CategoryStyle" />
 
         <!-- Input fields -->
         <LinearLayout
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="2"
-            android:orientation="vertical"
-            android:paddingLeft="4dp">
+            android:paddingLeft="4dp"
+            android:orientation="vertical">
 
             <!-- Name field -->
             <EditText
                 android:id="@+id/edit_item_name"
-                style="@style/EditorFieldStyle"
                 android:hint="@string/hint_item_name"
-                android:inputType="textCapWords" />
+                android:inputType="textCapWords"
+                style="@style/EditorFieldStyle" />
 
             <!-- Breed field -->
             <EditText
                 android:id="@+id/edit_item_description"
-                style="@style/EditorFieldStyle"
                 android:hint="@string/hint_item_description"
-                android:inputType="textCapWords" />
+                android:inputType="textCapWords"
+                style="@style/EditorFieldStyle" />
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Quantoty category -->
+    <!-- Quantity category -->
     <LinearLayout
         android:id="@+id/container_quantity"
         android:layout_width="match_parent"
@@ -53,22 +54,22 @@
 
         <!-- Label -->
         <TextView
-            style="@style/CategoryStyle"
-            android:text="@string/category_quantity" />
+            android:text="@string/category_quantity"
+            style="@style/CategoryStyle" />
 
         <!-- Input field -->
         <LinearLayout
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="2"
             android:orientation="vertical">
 
             <!-- Quantity -->
             <EditText
                 android:id="@+id/edit_item_quantity"
-                style="@style/EditorFieldStyle"
                 android:hint="@string/hint_item_quantity"
-                android:inputType="number" />
+                android:inputType="number"
+                style="@style/EditorFieldStyle" />
         </LinearLayout>
     </LinearLayout>
 
@@ -81,28 +82,28 @@
 
         <!-- Label -->
         <TextView
-            style="@style/CategoryStyle"
-            android:text="@string/category_price" />
+            android:text="@string/category_price"
+            style="@style/CategoryStyle" />
 
         <!-- Input fields -->
         <RelativeLayout
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="2"
             android:paddingLeft="4dp">
 
             <!-- Price field -->
             <EditText
                 android:id="@+id/edit_item_price"
-                style="@style/EditorFieldStyle"
                 android:hint="@string/hint_item_price"
-                android:inputType="number" />
+                android:inputType="number"
+                style="@style/EditorFieldStyle" />
 
             <!-- Units for price (euro) -->
             <TextView
-                android:id="@+id/label_price_units"
-                style="@style/EditorUnitsStyle"
-                android:text="@string/unit_item_price" />
+                android:id="@+id/label_p_units"
+                android:text="@string/unit_item_price"
+                style="@style/EditorUnitsStyle"/>
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>
