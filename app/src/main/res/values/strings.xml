@@ -85,7 +85,7 @@
     <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
     <string name="hint_item_quantity">Quantity</string>
 
-    <!-- Units for weight of the item (kilograms) [CHAR LIMIT=5] -->
+    <!-- Units for price of the item (kilograms) [CHAR LIMIT=5] -->
     <string name="unit_item_price">€</string>
 
     <!-- Label for the item's breed if the breed is unknown [CHAR LIMIT=20] -->

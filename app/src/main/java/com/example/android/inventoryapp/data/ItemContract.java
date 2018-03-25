@@ -15,8 +15,8 @@
  */
 package com.example.android.inventoryapp.data;
 
-import android.net.Uri;
 import android.content.ContentResolver;
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
@@ -26,7 +26,8 @@ public final class ItemContract {
 
     // To prevent someone from accidentally instantiating the contract class,
     // give it an empty constructor.
-    private ItemContract() {}
+    private ItemContract() {
+    }
 
     /**
      * The "Content authority" is a name for the entire content provider, similar to the
@@ -56,7 +57,9 @@ public final class ItemContract {
      */
     public static final class ItemEntry implements BaseColumns {
 
-        /** The content URI to access the item data in the provider */
+        /**
+         * The content URI to access the item data in the provider
+         */
         public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_ITEMS);
 
         /**
@@ -71,40 +74,40 @@ public final class ItemContract {
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_ITEMS;
 
-        /** Name of database table for items */
+        /**
+         * Name of database table for items
+         */
         public final static String TABLE_NAME = "items";
 
         /**
          * Unique ID number for the item (only for use in the database table).
-         *
+         * <p>
          * Type: INTEGER
          */
         public final static String _ID = BaseColumns._ID;
 
         /**
          * Name of the item.
-         *
+         * <p>
          * Type: TEXT
          */
-        public final static String COLUMN_ITEM_NAME ="name";
+        public final static String COLUMN_ITEM_NAME = "name";
 
         /**
          * Description of the item.
-         *
+         * <p>
          * Type: TEXT
          */
         public final static String COLUMN_ITEM_DESCRIPTION = "description";
 
-
         public final static String COLUMN_ITEM_QUANTITY = "quantity";
 
         /**
-         * price of the item.
-         *
+         * Price of the item.
+         * <p>
          * Type: INTEGER
          */
         public final static String COLUMN_ITEM_PRICE = "price";
-
 
     }
 

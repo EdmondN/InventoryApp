@@ -41,10 +41,14 @@ import com.example.android.inventoryapp.data.ItemContract.ItemEntry;
 public class CatalogActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
-    /** Identifier for the item data loader */
+    /**
+     * Identifier for the item data loader
+     */
     private static final int ITEM_LOADER = 0;
 
-    /** Adapter for the ListView */
+    /**
+     * Adapter for the ListView
+     */
     ItemCursorAdapter mCursorAdapter;
 
     @Override
@@ -157,7 +161,7 @@ public class CatalogActivity extends AppCompatActivity implements
         String[] projection = {
                 ItemEntry._ID,
                 ItemEntry.COLUMN_ITEM_NAME,
-                ItemEntry.COLUMN_ITEM_DESCRIPTION };
+                ItemEntry.COLUMN_ITEM_DESCRIPTION};
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context

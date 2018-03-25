@@ -17,13 +17,19 @@ import com.example.android.inventoryapp.data.ItemContract.ItemEntry;
  */
 public class ItemProvider extends ContentProvider {
 
-    /** Tag for the log messages */
+    /**
+     * Tag for the log messages
+     */
     public static final String LOG_TAG = ItemProvider.class.getSimpleName();
 
-    /** URI matcher code for the content URI for the items table */
+    /**
+     * URI matcher code for the content URI for the items table
+     */
     private static final int ITEMS = 100;
 
-    /** URI matcher code for the content URI for a single item in the items table */
+    /**
+     * URI matcher code for the content URI for a single item in the items table
+     */
     private static final int ITEM_ID = 101;
 
     /**
@@ -54,7 +60,9 @@ public class ItemProvider extends ContentProvider {
         sUriMatcher.addURI(ItemContract.CONTENT_AUTHORITY, ItemContract.PATH_ITEMS + "/#", ITEM_ID);
     }
 
-    /** Database helper object */
+    /**
+     * Database helper object
+     */
     private ItemDbHelper mDbHelper;
 
     @Override
@@ -92,7 +100,7 @@ public class ItemProvider extends ContentProvider {
                 // arguments that will fill in the "?". Since we have 1 question mark in the
                 // selection, we have 1 String in the selection arguments' String array.
                 selection = ItemEntry._ID + "=?";
-                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
 
                 // This will perform a query on the items table where the _id equals 3 to return a
                 // Cursor containing that row of the table.
@@ -178,7 +186,7 @@ public class ItemProvider extends ContentProvider {
                 // so we know which row to update. Selection will be "_id=?" and selection
                 // arguments will be a String array containing the actual ID.
                 selection = ItemEntry._ID + "=?";
-                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updateItem(uri, contentValues, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Update is not supported for " + uri);
@@ -259,7 +267,7 @@ public class ItemProvider extends ContentProvider {
             case ITEM_ID:
                 // Delete a single row given by the ID in the URI
                 selection = ItemEntry._ID + "=?";
-                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 rowsDeleted = database.delete(ItemEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             default:
