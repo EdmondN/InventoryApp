@@ -61,7 +61,7 @@ public class ItemDbHelper extends SQLiteOpenHelper {
                 + ItemEntry.COLUMN_ITEM_QUANTITY + " INTEGER DEFAULT 1, "
                 + ItemEntry.COLUMN_ITEM_PRICE + " REAL NOT NULL, "
                 + ItemEntry.COLUMN_ITEM_SUPPLIER_NAME + " TEXT NOT NULL, "
-                + ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE + " REAL NOT NULL);";
+                + ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE + " TEXT NOT NULL);";
 
         // Log the SQL statement in case of error
         Log.e(LOG_TAG, "Current SQL statement" + SQL_CREATE_ITEMS_TABLE);
