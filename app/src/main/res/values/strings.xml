@@ -97,4 +97,5 @@
 
     <!-- Label for the item's breed if the breed is unknown [CHAR LIMIT=20] -->
     <string name="unknown_description">Unknown Description</string>
+    <string name="inventoryimage">inventoryImage</string>
 </resources>
