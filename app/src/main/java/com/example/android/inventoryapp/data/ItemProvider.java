@@ -12,8 +12,6 @@ import android.util.Log;
 
 import com.example.android.inventoryapp.data.ItemContract.ItemEntry;
 
-import java.math.BigInteger;
-
 /**
  * {@link ContentProvider} for Items app.
  */
