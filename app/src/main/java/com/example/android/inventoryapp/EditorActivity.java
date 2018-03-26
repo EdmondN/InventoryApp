@@ -362,7 +362,7 @@ public class EditorActivity extends AppCompatActivity implements
             int quantity = cursor.getInt(quantityColumnIndex);
             int price = cursor.getInt(priceColumnIndex);
             String suppliername = cursor.getString(suppliernameColumnIndex);
-            int supplierphone = cursor.getInt(supplierphoneColumnIndex);
+            String supplierphone = cursor.getString(supplierphoneColumnIndex);
 
             // Update the views on the screen with the values from the database
             mNameEditText.setText(name);
@@ -370,7 +370,7 @@ public class EditorActivity extends AppCompatActivity implements
             mQuantityEditText.setText(Integer.toString(quantity));
             mPriceEditText.setText(Integer.toString(price));
             mSupplierNameEditText.setText(suppliername);
-            mSupplierPhoneEditText.setText(Integer.toString(supplierphone));
+            mSupplierPhoneEditText.setText(supplierphone);
 
         }
     }

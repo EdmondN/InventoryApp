@@ -12,6 +12,8 @@ import android.util.Log;
 
 import com.example.android.inventoryapp.data.ItemContract.ItemEntry;
 
+import java.math.BigInteger;
+
 /**
  * {@link ContentProvider} for Items app.
  */
@@ -236,8 +238,8 @@ public class ItemProvider extends ContentProvider {
 
         if (values.containsKey(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE)) {
             // Check that the price is greater than or equal to 0 kg
-            Integer phone = values.getAsInteger(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE);
-            if (phone != null && phone < 0) {
+            String phone = values.getAsString(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE);
+            if (phone == null) {
                 throw new IllegalArgumentException("Item requires valid Phone Number");
             }
         }

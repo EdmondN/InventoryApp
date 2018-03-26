@@ -116,7 +116,7 @@ public class CatalogActivity extends AppCompatActivity implements
         values.put(ItemEntry.COLUMN_ITEM_QUANTITY, 1);
         values.put(ItemEntry.COLUMN_ITEM_PRICE, 400);
         values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME, "Eddie");
-        values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE, 6937734);
+        values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE, "6937734972");
 
         // Insert a new row for Toto into the provider using the ContentResolver.
         // Use the {@link ItemEntry#CONTENT_URI} to indicate that we want to insert
