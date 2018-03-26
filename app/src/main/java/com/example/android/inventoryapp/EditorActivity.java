@@ -372,7 +372,6 @@ public class EditorActivity extends AppCompatActivity implements
             mSupplierNameEditText.setText(suppliername);
             mSupplierPhoneEditText.setText(Integer.toString(supplierphone));
 
-
         }
     }
 
