@@ -32,7 +32,7 @@ public class ItemDbHelper extends SQLiteOpenHelper {
     /**
      * Name of the database file
      */
-    private static final String DATABASE_NAME = "items.db";
+    private static final String DATABASE_NAME = "inventory.db";
 
     /**
      * Database version. If you change the database schema, you must increment the database version.
@@ -59,7 +59,10 @@ public class ItemDbHelper extends SQLiteOpenHelper {
                 + ItemEntry.COLUMN_ITEM_NAME + " TEXT NOT NULL, "
                 + ItemEntry.COLUMN_ITEM_DESCRIPTION + " TEXT, "
                 + ItemEntry.COLUMN_ITEM_QUANTITY + " INTEGER DEFAULT 1, "
-                + ItemEntry.COLUMN_ITEM_PRICE + " REAL NOT NULL);";
+                + ItemEntry.COLUMN_ITEM_PRICE + " REAL NOT NULL, "
+                + ItemEntry.COLUMN_ITEM_SUPPLIER_NAME + " TEXT NOT NULL, "
+                + ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE + " REAL NOT NULL);";
+
         // Log the SQL statement in case of error
         Log.e(LOG_TAG, "Current SQL statement" + SQL_CREATE_ITEMS_TABLE);
         // Execute the SQL statement

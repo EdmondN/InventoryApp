@@ -227,6 +227,21 @@ public class ItemProvider extends ContentProvider {
             }
         }
 
+        if (values.containsKey(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME)) {
+            String suppliername = values.getAsString(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME);
+            if (suppliername == null) {
+                throw new IllegalArgumentException("Item requires a supplier Name");
+            }
+        }
+
+        if (values.containsKey(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE)) {
+            // Check that the price is greater than or equal to 0 kg
+            Integer phone = values.getAsInteger(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE);
+            if (phone != null && phone < 0) {
+                throw new IllegalArgumentException("Item requires valid Phone Number");
+            }
+        }
+
         // No need to check the breed, any value is valid (including null).
 
         // If there are no values to update, then don't try to update the database

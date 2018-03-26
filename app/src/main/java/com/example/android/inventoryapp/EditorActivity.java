@@ -74,6 +74,16 @@ public class EditorActivity extends AppCompatActivity implements
     private EditText mQuantityEditText;
 
     /**
+     * EditText field to enter the item's Supplier Name
+     */
+    private EditText mSupplierNameEditText;
+
+    /**
+     * EditText field to enter the item's Supplier Name
+     */
+    private EditText mSupplierPhoneEditText;
+
+    /**
      * Boolean flag that keeps track of whether the item has been edited (true) or not (false)
      */
     private boolean mItemHasChanged = false;
@@ -121,16 +131,20 @@ public class EditorActivity extends AppCompatActivity implements
         // Find all relevant views that we will need to read user input from
         mNameEditText = (EditText) findViewById(R.id.edit_item_name);
         mDescriptionEditText = (EditText) findViewById(R.id.edit_item_description);
-        mPriceEditText = (EditText) findViewById(R.id.edit_item_price);
         mQuantityEditText = (EditText) findViewById(R.id.edit_item_quantity);
+        mPriceEditText = (EditText) findViewById(R.id.edit_item_price);
+        mSupplierNameEditText = (EditText) findViewById(R.id.edit_item_supplier);
+        mSupplierPhoneEditText = (EditText) findViewById(R.id.edit_item_phone);
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
         // or not, if the user tries to leave the editor without saving.
         mNameEditText.setOnTouchListener(mTouchListener);
         mDescriptionEditText.setOnTouchListener(mTouchListener);
-        mPriceEditText.setOnTouchListener(mTouchListener);
         mQuantityEditText.setOnTouchListener(mTouchListener);
+        mPriceEditText.setOnTouchListener(mTouchListener);
+        mSupplierNameEditText.setOnTouchListener(mTouchListener);
+        mSupplierPhoneEditText.setOnTouchListener(mTouchListener);
 
     }
 
@@ -142,14 +156,16 @@ public class EditorActivity extends AppCompatActivity implements
         // Use trim to eliminate leading or trailing white space
         String nameString = mNameEditText.getText().toString().trim();
         String descriptionString = mDescriptionEditText.getText().toString().trim();
-        String priceString = mPriceEditText.getText().toString().trim();
         String quantityString = mQuantityEditText.getText().toString().trim();
+        String priceString = mPriceEditText.getText().toString().trim();
+        String suppliernameString = mSupplierNameEditText.getText().toString().trim();
+        String supplierphoneString = mSupplierPhoneEditText.getText().toString().trim();
 
         // Check if this is supposed to be a new item
         // and check if all the fields in the editor are blank
         if (mCurrentItemUri == null &&
                 TextUtils.isEmpty(nameString) && TextUtils.isEmpty(descriptionString) &&
-                TextUtils.isEmpty(priceString) && TextUtils.isEmpty(quantityString)) {
+                TextUtils.isEmpty(quantityString) && TextUtils.isEmpty(priceString) && TextUtils.isEmpty(suppliernameString) && TextUtils.isEmpty(supplierphoneString)) {
             // Since no fields were modified, we can return early without creating a new item.
             // No need to create ContentValues and no need to do any ContentProvider operations.
             return;
@@ -161,6 +177,8 @@ public class EditorActivity extends AppCompatActivity implements
         values.put(ItemEntry.COLUMN_ITEM_NAME, nameString);
         values.put(ItemEntry.COLUMN_ITEM_DESCRIPTION, descriptionString);
         values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantityString);
+        values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME, suppliernameString);
+        values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE, supplierphoneString);
         // If the price is not provided by the user, don't try to parse the string into an
         // integer value. Use 0 by default.
         int price = 0;
@@ -307,7 +325,9 @@ public class EditorActivity extends AppCompatActivity implements
                 ItemEntry.COLUMN_ITEM_NAME,
                 ItemEntry.COLUMN_ITEM_DESCRIPTION,
                 ItemEntry.COLUMN_ITEM_QUANTITY,
-                ItemEntry.COLUMN_ITEM_PRICE};
+                ItemEntry.COLUMN_ITEM_PRICE,
+                ItemEntry.COLUMN_ITEM_SUPPLIER_NAME,
+                ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE};
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
@@ -333,18 +353,25 @@ public class EditorActivity extends AppCompatActivity implements
             int descriptionColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_DESCRIPTION);
             int quantityColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_QUANTITY);
             int priceColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_PRICE);
+            int suppliernameColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME);
+            int supplierphoneColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE);
 
             // Extract out the value from the Cursor for the given column index
             String name = cursor.getString(nameColumnIndex);
             String description = cursor.getString(descriptionColumnIndex);
             int quantity = cursor.getInt(quantityColumnIndex);
             int price = cursor.getInt(priceColumnIndex);
+            String suppliername = cursor.getString(suppliernameColumnIndex);
+            int supplierphone = cursor.getInt(supplierphoneColumnIndex);
 
             // Update the views on the screen with the values from the database
             mNameEditText.setText(name);
             mDescriptionEditText.setText(description);
             mQuantityEditText.setText(Integer.toString(quantity));
             mPriceEditText.setText(Integer.toString(price));
+            mSupplierNameEditText.setText(suppliername);
+            mSupplierPhoneEditText.setText(Integer.toString(supplierphone));
+
 
         }
     }
@@ -356,6 +383,8 @@ public class EditorActivity extends AppCompatActivity implements
         mDescriptionEditText.setText("");
         mPriceEditText.setText("");
         mQuantityEditText.setText("");
+        mSupplierNameEditText.setText("");
+        mSupplierPhoneEditText.setText("");
     }
 
     /**

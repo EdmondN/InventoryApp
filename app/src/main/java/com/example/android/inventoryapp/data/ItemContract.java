@@ -109,6 +109,10 @@ public final class ItemContract {
          */
         public final static String COLUMN_ITEM_PRICE = "price";
 
+        public final static String COLUMN_ITEM_SUPPLIER_NAME = "suppliername";
+
+        public final static String COLUMN_ITEM_SUPPLIER_PHONE = "supplierphone";
+
     }
 
 }
