@@ -68,8 +68,8 @@
 
             <Button
                 android:id="@+id/buttonminus"
-                android:text="@string/minus"
-                style="@style/quantityButtons" />
+                style="@style/quantityButtons"
+                android:text="@string/minus" />
             <!-- Quantity -->
             <EditText
                 android:id="@+id/quantity_edit_view"
@@ -119,7 +119,7 @@
             <TextView
                 android:id="@+id/label_p_units"
                 style="@style/EditorUnitsStyle"
-                android:text="@string/unit_item_price"/>
+                android:text="@string/unit_item_price" />
         </RelativeLayout>
     </LinearLayout>
     <!-- Supplier category -->
@@ -173,11 +173,16 @@
 
             <!-- Price field -->
             <EditText
-                android:id="@+id/edit_item_phone"
+                android:id="@+id/edit_call_phone"
                 style="@style/EditorFieldStyle"
                 android:hint="@string/hint_item_phone"
                 android:inputType="phone"
                 android:textStyle="bold" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                style="@style/addCircleBlack"
+                android:src="@drawable/ic_call_black_24dp" />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>
