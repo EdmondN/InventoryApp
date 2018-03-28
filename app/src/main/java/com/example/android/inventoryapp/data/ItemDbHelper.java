@@ -32,7 +32,7 @@ public class ItemDbHelper extends SQLiteOpenHelper {
     /**
      * Name of the database file
      */
-    private static final String DATABASE_NAME = "inventoryapp.db";
+    private static final String DATABASE_NAME = "inventoryapp1.db";
 
     /**
      * Database version. If you change the database schema, you must increment the database version.

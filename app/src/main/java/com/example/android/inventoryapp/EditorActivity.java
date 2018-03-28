@@ -165,7 +165,7 @@ public class EditorActivity extends AppCompatActivity implements
                 getContentResolver().update(mCurrentItemUri, values, null, null);
             }
         });
-//This method is called when the minus button is clicked.*/
+        //This method is called when the minus button is clicked.*/
         minusButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ContentValues values = new ContentValues();
