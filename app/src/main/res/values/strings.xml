@@ -92,10 +92,15 @@
     <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
     <string name="hint_item_quantity">Quantity</string>
 
-    <!-- Units for price of the item (kilograms) [CHAR LIMIT=5] -->
-    <string name="unit_item_price">€</string>
+    <!-- Units for price of the item (euro) [CHAR LIMIT=5] -->
+    <string name="unit_item_price">\u20AC</string>
 
     <!-- Label for the item's breed if the breed is unknown [CHAR LIMIT=20] -->
     <string name="unknown_description">Unknown Description</string>
-    <string name="inventoryimage">inventoryImage</string>
+    <string name="inventoryimage">Inventory Image</string>
+    <string name="sale">SALE</string>
+    <string name="samsung">Samsung</string>
+    <string name="s6description">S6 Gold</string>
+    <string name="eddie">Eddie</string>
+    <string name="phoneNumber">6937734972</string>
 </resources>

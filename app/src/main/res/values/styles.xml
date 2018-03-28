@@ -2,6 +2,7 @@
 
 <resources>
     <!-- Base application theme -->
+    <!--suppress AndroidDomInspection -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -9,6 +10,7 @@
     </style>
 
     <!-- Theme of the editor -->
+    <!--suppress AndroidDomInspection -->
     <style name="EditorTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/editorColorPrimary</item>
         <item name="colorPrimaryDark">@color/editorColorPrimaryDark</item>

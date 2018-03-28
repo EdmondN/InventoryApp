@@ -15,6 +15,7 @@
  */
 package com.example.android.inventoryapp;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
@@ -32,6 +33,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -89,10 +91,12 @@ public class EditorActivity extends AppCompatActivity implements
     private boolean mItemHasChanged = false;
 
     /**
+     * /**
      * OnTouchListener that listens for any user touches on a View, implying that they are modifying
      * the view, and we change the mItemHasChanged boolean to true.
      */
     private final View.OnTouchListener mTouchListener = new View.OnTouchListener() {
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
             mItemHasChanged = true;
@@ -100,6 +104,7 @@ public class EditorActivity extends AppCompatActivity implements
         }
     };
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,10 +136,12 @@ public class EditorActivity extends AppCompatActivity implements
         // Find all relevant views that we will need to read user input from
         mNameEditText = findViewById(R.id.edit_item_name);
         mDescriptionEditText = findViewById(R.id.edit_item_description);
-        mQuantityEditText = findViewById(R.id.edit_item_quantity);
+        mQuantityEditText = findViewById(R.id.quantity_edit_view);
         mPriceEditText = findViewById(R.id.edit_item_price);
         mSupplierNameEditText = findViewById(R.id.edit_item_supplier);
         mSupplierPhoneEditText = findViewById(R.id.edit_item_phone);
+        Button minusButton = findViewById(R.id.buttonminus);
+        Button plusButton = findViewById(R.id.buttonplus);
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
@@ -145,7 +152,32 @@ public class EditorActivity extends AppCompatActivity implements
         mPriceEditText.setOnTouchListener(mTouchListener);
         mSupplierNameEditText.setOnTouchListener(mTouchListener);
         mSupplierPhoneEditText.setOnTouchListener(mTouchListener);
+        minusButton.setOnTouchListener(mTouchListener);
+        plusButton.setOnTouchListener(mTouchListener);
 
+        //This method is called when the plus button is clicked.*/
+
+        plusButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ContentValues values = new ContentValues();
+                int quantity = Integer.parseInt(mQuantityEditText.getText().toString().trim());
+                values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantity + 1);
+                getContentResolver().update(mCurrentItemUri, values, null, null);
+            }
+        });
+//This method is called when the minus button is clicked.*/
+        minusButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ContentValues values = new ContentValues();
+                int quantity = Integer.parseInt(mQuantityEditText.getText().toString().trim());
+                if (quantity > 1) {
+                    values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantity - 1);
+                } else {
+                    Toast.makeText(getApplicationContext(), "No Less than 1 Item", Toast.LENGTH_SHORT).show();
+                }
+                getContentResolver().update(mCurrentItemUri, values, null, null);
+            }
+        });
     }
 
     /**
@@ -165,7 +197,7 @@ public class EditorActivity extends AppCompatActivity implements
         // and check if all the fields in the editor are blank
         if (mCurrentItemUri == null &&
                 TextUtils.isEmpty(nameString) && TextUtils.isEmpty(descriptionString) &&
-                TextUtils.isEmpty(quantityString) && TextUtils.isEmpty(priceString) && TextUtils.isEmpty(suppliernameString) && TextUtils.isEmpty(supplierphoneString)) {
+                TextUtils.isEmpty(priceString) && TextUtils.isEmpty(suppliernameString) && TextUtils.isEmpty(supplierphoneString)) {
             // Since no fields were modified, we can return early without creating a new item.
             // No need to create ContentValues and no need to do any ContentProvider operations.
             return;

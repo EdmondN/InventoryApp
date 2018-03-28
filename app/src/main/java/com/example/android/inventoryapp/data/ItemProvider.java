@@ -142,7 +142,7 @@ public class ItemProvider extends ContentProvider {
             throw new IllegalArgumentException("Item requires a name");
         }
 
-        // Check that the gender is valid
+        // Check that the quantity is valid
         Integer quantity = values.getAsInteger(ItemEntry.COLUMN_ITEM_QUANTITY);
         if (quantity != null && quantity < 0) {
             throw new IllegalArgumentException("Item requires valid Quantity");
@@ -154,7 +154,7 @@ public class ItemProvider extends ContentProvider {
             throw new IllegalArgumentException("Item requires valid Price");
         }
 
-        // No need to check the breed, any value is valid (including null).
+        // No need to check the description, any value is valid (including null).
 
         // Get writeable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
@@ -242,7 +242,7 @@ public class ItemProvider extends ContentProvider {
             }
         }
 
-        // No need to check the breed, any value is valid (including null).
+        // No need to check the description, any value is valid (including null).
 
         // If there are no values to update, then don't try to update the database
         if (values.size() == 0) {

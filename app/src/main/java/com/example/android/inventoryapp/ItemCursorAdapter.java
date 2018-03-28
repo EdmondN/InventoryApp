@@ -15,14 +15,19 @@
  */
 package com.example.android.inventoryapp;
 
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.inventoryapp.data.ItemContract.ItemEntry;
 
@@ -69,18 +74,24 @@ public class ItemCursorAdapter extends CursorAdapter {
      *                correct row.
      */
     @Override
-    public void bindView(View view, Context context, Cursor cursor) {
+    public void bindView(View view, final Context context, final Cursor cursor) {
         // Find individual views that we want to modify in the list item layout
         TextView nameTextView = view.findViewById(R.id.name);
         TextView summaryTextView = view.findViewById(R.id.summary);
+        TextView priceTextView = view.findViewById(R.id.product_price);
+        TextView quantityTextView = view.findViewById(R.id.quantity);
 
         // Find the columns of ITEM attributes that we're interested in
         int nameColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_NAME);
         int descriptionColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_DESCRIPTION);
+        int priceColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_PRICE);
+        int quantityColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_QUANTITY);
 
         // Read the ITEM attributes from the Cursor for the current item
         String itemName = cursor.getString(nameColumnIndex);
         String itemDescription = cursor.getString(descriptionColumnIndex);
+        String itemPrice = cursor.getString(priceColumnIndex);
+        String itemQuantity = cursor.getString(quantityColumnIndex);
 
         // If the item description is empty string or null, then use some default text
         // that says "Unknown description", so the TextView isn't blank.
@@ -91,5 +102,57 @@ public class ItemCursorAdapter extends CursorAdapter {
         // Update the TextViews with the attributes for the current item
         nameTextView.setText(itemName);
         summaryTextView.setText(itemDescription);
+        String euro = context.getString(R.string.unit_item_price);
+        priceTextView.setText(itemPrice + euro);
+        quantityTextView.setText(itemQuantity);
+
+        // Find the sale button
+        Button saleButton = view.findViewById(R.id.list_item_sale);
+
+        // Get the position before the button is clicked
+        final int position = cursor.getPosition();
+
+        saleButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                // Move the cursor to the correct position
+                cursor.moveToPosition(position);
+
+                // Get the Uri for the current drug
+                int IdColumnIndex = cursor.getColumnIndex(ItemEntry._ID);
+                final long itemId = cursor.getLong(IdColumnIndex);
+                Uri mCurrentItemUri = ContentUris.withAppendedId(ItemEntry.CONTENT_URI, itemId);
+
+                // Find the columns of drug attributes that we're interested in
+                int quantityColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_QUANTITY);
+
+                // Read the drug attributes from the Cursor for the current drug
+                String itemQuantity = cursor.getString(quantityColumnIndex);
+
+                // Convert the string to an integer
+                int updateQuantity = Integer.parseInt(itemQuantity);
+
+                if (updateQuantity > 0) {
+                    // Decrease the quantity by 1
+                    updateQuantity--;
+
+                    // Defines an object to contain the updated values
+                    ContentValues updateValues = new ContentValues();
+                    updateValues.put(ItemEntry.COLUMN_ITEM_QUANTITY, updateQuantity);
+
+                    //update the phone with the content URI mCurrentPhoneUri and pass in the new
+                    //content values. Pass in null for the selection and selection args
+                    //because mCurrentPhoneUri will already identify the correct row in the database that
+                    // we want to modify.
+                    int rowsUpdate = context.getContentResolver().update(mCurrentItemUri, updateValues, null, null);
+                }
+
+                else {
+                    Toast.makeText(context, "Item out of stock", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 }

@@ -113,6 +113,8 @@ public final class ItemContract {
 
         public final static String COLUMN_ITEM_SUPPLIER_PHONE = "supplierphone";
 
+        public final static String COLUMN_SALE = "saleButton";
+
     }
 
 }

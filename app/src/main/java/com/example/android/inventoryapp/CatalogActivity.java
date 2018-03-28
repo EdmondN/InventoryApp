@@ -111,12 +111,12 @@ public class CatalogActivity extends AppCompatActivity implements
         // Create a ContentValues object where column names are the keys,
         // and Toto's item attributes are the values.
         ContentValues values = new ContentValues();
-        values.put(ItemEntry.COLUMN_ITEM_NAME, "Samsung");
-        values.put(ItemEntry.COLUMN_ITEM_DESCRIPTION, "S6 Gold");
+        values.put(ItemEntry.COLUMN_ITEM_NAME, getString(R.string.samsung));
+        values.put(ItemEntry.COLUMN_ITEM_DESCRIPTION, getString(R.string.s6description));
         values.put(ItemEntry.COLUMN_ITEM_QUANTITY, 1);
         values.put(ItemEntry.COLUMN_ITEM_PRICE, 400);
-        values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME, "Eddie");
-        values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE, "6937734972");
+        values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME, getString(R.string.eddie));
+        values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE, getString(R.string.phoneNumber));
 
         // Insert a new row for Toto into the provider using the ContentResolver.
         // Use the {@link ItemEntry#CONTENT_URI} to indicate that we want to insert
@@ -163,7 +163,8 @@ public class CatalogActivity extends AppCompatActivity implements
         String[] projection = {
                 ItemEntry._ID,
                 ItemEntry.COLUMN_ITEM_NAME,
-                ItemEntry.COLUMN_ITEM_DESCRIPTION};
+                ItemEntry.COLUMN_ITEM_DESCRIPTION,
+                ItemEntry.COLUMN_ITEM_PRICE};
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
