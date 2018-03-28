@@ -46,6 +46,8 @@ import com.example.android.inventoryapp.data.ItemContract.ItemEntry;
 public class EditorActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
+    private static final String PHONE = "tel";
+
     /**
      * Identifier for the item data loader
      */
@@ -179,6 +181,15 @@ public class EditorActivity extends AppCompatActivity implements
                 getContentResolver().update(mCurrentItemUri, values, null, null);
             }
         });
+        FloatingActionButton call = findViewById(R.id.edit_call_phone);
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phone = mSupplierPhoneEditText.getText().toString().trim();
+                Intent intentCall = new Intent(Intent.ACTION_DIAL, Uri.fromParts(PHONE, phone, null));
+                startActivity(intentCall);
+            }
+        });
     }
 
     /**
@@ -196,63 +207,45 @@ public class EditorActivity extends AppCompatActivity implements
 
         // Check if this is supposed to be a new item
         // and check if all the fields in the editor are blank
-        if (mCurrentItemUri == null &&
-                TextUtils.isEmpty(nameString) && TextUtils.isEmpty(descriptionString) &&
-                TextUtils.isEmpty(priceString) && TextUtils.isEmpty(suppliernameString) && TextUtils.isEmpty(supplierphoneString)) {
+        if (TextUtils.isEmpty(nameString)) {
+            mNameEditText.setError("The Product Name cannot be blank");
+        } else if (priceString.isEmpty()) {
+            mPriceEditText.setError("The Stock Unit Price Cannot be less than Zero");
+        } else if (TextUtils.isEmpty(suppliernameString)) {
+            mSupplierNameEditText.setError("The Supplier Name cannot be blank");
+        } else if (TextUtils.isEmpty(supplierphoneString)) {
+            mSupplierPhoneEditText.setError("The Supplier Phone cannot be blank");
+        } else if (TextUtils.isEmpty(quantityString)) {
+            mQuantityEditText.setError("The Stock Quantity Cannot be less than Zero");
             // Since no fields were modified, we can return early without creating a new item.
             // No need to create ContentValues and no need to do any ContentProvider operations.
-            return;
-        }
-
-        // Create a ContentValues object where column names are the keys,
-        // and item attributes from the editor are the values.
-        ContentValues values = new ContentValues();
-        values.put(ItemEntry.COLUMN_ITEM_NAME, nameString);
-        values.put(ItemEntry.COLUMN_ITEM_DESCRIPTION, descriptionString);
-        values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantityString);
-        values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME, suppliernameString);
-        values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE, supplierphoneString);
-        // If the price is not provided by the user, don't try to parse the string into an
-        // integer value. Use 0 by default.
-        int price = 0;
-        if (!TextUtils.isEmpty(priceString)) {
-            price = Integer.parseInt(priceString);
-        }
-        values.put(ItemEntry.COLUMN_ITEM_PRICE, price);
-
-        // Determine if this is a new or existing item by checking if mCurrentItemUri is null or not
-        if (mCurrentItemUri == null) {
-            // This is a NEW item, so insert a new item into the provider,
-            // returning the content URI for the new item.
-            Uri newUri = getContentResolver().insert(ItemEntry.CONTENT_URI, values);
-
-            // Show a toast message depending on whether or not the insertion was successful.
-            if (newUri == null) {
-                // If the new content URI is null, then there was an error with insertion.
-                Toast.makeText(this, getString(R.string.editor_insert_item_failed),
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                // Otherwise, the insertion was successful and we can display a toast.
-                Toast.makeText(this, getString(R.string.editor_insert_item_successful),
-                        Toast.LENGTH_SHORT).show();
-            }
         } else {
-            // Otherwise this is an EXISTING item, so update the item with content URI: mCurrentItemUri
-            // and pass in the new ContentValues. Pass in null for the selection and selection args
-            // because mCurrentItemUri will already identify the correct row in the database that
-            // we want to modify.
-            int rowsAffected = getContentResolver().update(mCurrentItemUri, values, null, null);
+            // Create a ContentValues object where column names are the keys,
+            // and item attributes from the editor are the values.
+            ContentValues values = new ContentValues();
+            values.put(ItemEntry.COLUMN_ITEM_NAME, nameString);
+            values.put(ItemEntry.COLUMN_ITEM_DESCRIPTION, descriptionString);
+            values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantityString);
+            values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME, suppliernameString);
+            values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE, supplierphoneString);
+            values.put(ItemEntry.COLUMN_ITEM_PRICE, priceString);
 
-            // Show a toast message depending on whether or not the update was successful.
-            if (rowsAffected == 0) {
-                // If no rows were affected, then there was an error with the update.
-                Toast.makeText(this, getString(R.string.editor_update_item_failed),
-                        Toast.LENGTH_SHORT).show();
+            if (mCurrentItemUri == null) {
+                Uri newUri = getContentResolver().insert(ItemEntry.CONTENT_URI, values);
+                if (newUri == null) {
+                    Toast.makeText(this, getString(R.string.editor_insert_item_failed), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, getString(R.string.editor_insert_item_successful), Toast.LENGTH_SHORT).show();
+                }
             } else {
-                // Otherwise, the update was successful and we can display a toast.
-                Toast.makeText(this, getString(R.string.editor_update_item_successful),
-                        Toast.LENGTH_SHORT).show();
+                int rowsAffected = getContentResolver().update(mCurrentItemUri, values, null, null);
+                if (rowsAffected == 0) {
+                    Toast.makeText(this, getString(R.string.editor_update_item_successful), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, getString(R.string.editor_update_item_failed), Toast.LENGTH_SHORT).show();
+                }
             }
+            finish();
         }
     }
 

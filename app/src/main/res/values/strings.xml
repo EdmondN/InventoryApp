@@ -108,4 +108,5 @@
     <string name="plus">+</string>
     <string name="stock">Stock Quantity:</string>
     <string name="test">test</string>
+    <string name="errorFields">Insert All the Fields</string>
 </resources>
