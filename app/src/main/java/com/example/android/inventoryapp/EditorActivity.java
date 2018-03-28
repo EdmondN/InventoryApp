@@ -207,9 +207,11 @@ public class EditorActivity extends AppCompatActivity implements
 
         // Check if this is supposed to be a new item
         // and check if all the fields in the editor are blank
+        int price;
+        price = Integer.parseInt(priceString);
         if (TextUtils.isEmpty(nameString)) {
             mNameEditText.setError("The Product Name cannot be blank");
-        } else if (priceString.isEmpty()) {
+        } else if (price > 0) {
             mPriceEditText.setError("The Stock Unit Price Cannot be less than Zero");
         } else if (TextUtils.isEmpty(suppliernameString)) {
             mSupplierNameEditText.setError("The Supplier Name cannot be blank");
@@ -229,7 +231,8 @@ public class EditorActivity extends AppCompatActivity implements
             values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME, suppliernameString);
             values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE, supplierphoneString);
             values.put(ItemEntry.COLUMN_ITEM_PRICE, priceString);
-
+            // If the price is not provided by the user, don't try to parse the string into an
+            // integer value. Use 0 by default.
             if (mCurrentItemUri == null) {
                 Uri newUri = getContentResolver().insert(ItemEntry.CONTENT_URI, values);
                 if (newUri == null) {
