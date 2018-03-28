@@ -173,16 +173,22 @@
 
             <!-- Price field -->
             <EditText
-                android:id="@+id/edit_call_phone"
+                android:id="@+id/edit_item_phone"
                 style="@style/EditorFieldStyle"
                 android:hint="@string/hint_item_phone"
                 android:inputType="phone"
                 android:textStyle="bold" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                style="@style/addCircleBlack"
-                android:src="@drawable/ic_call_black_24dp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/edit_call_phone"
+                    style="@style/addCircleBlack"
+                    android:src="@drawable/ic_call_black_24dp" />
+
+            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>
