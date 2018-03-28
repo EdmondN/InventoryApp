@@ -44,5 +44,124 @@
         <item name="android:paddingRight">16dp</item>
         <item name="android:paddingTop">16dp</item>
         <item name="android:textAppearance">?android:textAppearanceSmall</item>
+            <item name="android:layout_alignParentEnd">true</item>
+            <item name="android:layout_alignParentTop">true</item>
+            <item name="android:layout_marginEnd">130dp</item>
+            <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="saleStyleButton">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginEnd">15dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:background">#2D3640</item>
+        <item name="android:focusable">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textAppearance">?android:textAppearance</item>
+        <item name="android:textColor">#FF0000</item>
+    </style>
+
+    <style name="nameStyleDispl">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        <item name="android:textColor">#2B3D4D</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="summaryStyleDispl">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:textColor">#2B3D4D</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="productPriceStyleDispl">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:textColor">#2B3D4D</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="quantityTextStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">#2B3D4D</item>
+    </style>
+
+    <style name="quantityDisplay">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="emptyImage">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:contentDescription">@string/inventoryimage</item>
+    </style>
+
+    <style name="emptyText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@+id/empty_shelter_image</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+    </style>
+
+    <style name="emptySubText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@+id/empty_title_text</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:textColor">#A2AAB0</item>
+    </style>
+
+    <style name="addCircleBlack">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_margin">@dimen/fab_margin</item>
+    </style>
+
+    <style name="quantityButtons">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+
+    <style name="quantityEdit" parent="EditorFieldStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentStart">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginStart">55dp</item>
+        <item name="android:inputType">number</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

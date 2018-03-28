@@ -103,4 +103,9 @@
     <string name="s6description">S6 Gold</string>
     <string name="eddie">Eddie</string>
     <string name="phoneNumber">6937734972</string>
+    <string name="one">1</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+    <string name="stock">Stock Quantity:</string>
+    <string name="test">test</string>
 </resources>

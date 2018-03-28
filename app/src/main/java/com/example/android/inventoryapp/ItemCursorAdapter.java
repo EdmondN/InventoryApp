@@ -146,9 +146,7 @@ public class ItemCursorAdapter extends CursorAdapter {
                     //because mCurrentPhoneUri will already identify the correct row in the database that
                     // we want to modify.
                     int rowsUpdate = context.getContentResolver().update(mCurrentItemUri, updateValues, null, null);
-                }
-
-                else {
+                } else {
                     Toast.makeText(context, "Item out of stock", Toast.LENGTH_SHORT).show();
                 }
             }
