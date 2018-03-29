@@ -15,7 +15,6 @@
  */
 package com.example.android.inventoryapp;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
@@ -202,12 +201,13 @@ public class EditorActivity extends AppCompatActivity implements
     // and check if all the fields in the editor are blank
 
     public boolean validateInputs() {
-        int price;
-        price = Integer.parseInt(priceString);
+
         if (TextUtils.isEmpty(nameString)) {
             mNameEditText.setError("The Product Name cannot be blank");
             return false;
         }
+        int price;
+        price = Integer.parseInt(priceString);
         if (price < 0) {
             mPriceEditText.setError("The Stock Unit Price Cannot be less than Zero");
             return false;
@@ -240,26 +240,27 @@ public class EditorActivity extends AppCompatActivity implements
         suppliernameString = mSupplierNameEditText.getText().toString().trim();
         supplierphoneString = mSupplierPhoneEditText.getText().toString().trim();
 
+        // Create a ContentValues object where column names are the keys,
+        // and item attributes from the editor are the values.
+        ContentValues values = new ContentValues();
+        values.put(ItemEntry.COLUMN_ITEM_NAME, nameString);
+        values.put(ItemEntry.COLUMN_ITEM_DESCRIPTION, descriptionString);
+        values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantityString);
+        values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME, suppliernameString);
+        values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE, supplierphoneString);
+        values.put(ItemEntry.COLUMN_ITEM_PRICE, priceString);
+
         // Since no fields were modified, we can return early without creating a new item.
         // No need to create ContentValues and no need to do any ContentProvider operations.
         boolean isInputOk = validateInputs();
 
         if (isInputOk) {
-            return;
+            saveItem();
             // save the item here
 
-        }
+        } else {
             // some error handling
 
-            // Create a ContentValues object where column names are the keys,
-            // and item attributes from the editor are the values.
-            ContentValues values = new ContentValues();
-            values.put(ItemEntry.COLUMN_ITEM_NAME, nameString);
-            values.put(ItemEntry.COLUMN_ITEM_DESCRIPTION, descriptionString);
-            values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantityString);
-            values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME, suppliernameString);
-            values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE, supplierphoneString);
-            values.put(ItemEntry.COLUMN_ITEM_PRICE, priceString);
             // If the price is not provided by the user, don't try to parse the string into an
             // integer value. Use 0 by default.
             if (mCurrentItemUri == null) {
@@ -279,6 +280,7 @@ public class EditorActivity extends AppCompatActivity implements
             }
             finish();
         }
+    }
 
 
     @Override

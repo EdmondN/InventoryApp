@@ -32,7 +32,7 @@ public class ItemDbHelper extends SQLiteOpenHelper {
     /**
      * Name of the database file
      */
-    private static final String DATABASE_NAME = "inventoryapp11.db";
+    private static final String DATABASE_NAME = "inventoryapp30.db";
 
     /**
      * Database version. If you change the database schema, you must increment the database version.
@@ -58,8 +58,8 @@ public class ItemDbHelper extends SQLiteOpenHelper {
                 + ItemEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + ItemEntry.COLUMN_ITEM_NAME + " TEXT NOT NULL, "
                 + ItemEntry.COLUMN_ITEM_DESCRIPTION + " TEXT, "
-                + ItemEntry.COLUMN_ITEM_QUANTITY + " INTEGER DEFAULT 1, "
-                + ItemEntry.COLUMN_ITEM_PRICE + " REAL NOT NULL, "
+                + ItemEntry.COLUMN_ITEM_QUANTITY + " INTEGER NOT NULL DEFAULT 0, "
+                + ItemEntry.COLUMN_ITEM_PRICE + " INTEGER NOT NULL DEFAULT 0, "
                 + ItemEntry.COLUMN_ITEM_SUPPLIER_NAME + " TEXT NOT NULL, "
                 + ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE + " TEXT NOT NULL);";
 
