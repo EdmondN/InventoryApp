@@ -90,8 +90,8 @@ public class ItemCursorAdapter extends CursorAdapter {
         // Read the ITEM attributes from the Cursor for the current item
         String itemName = cursor.getString(nameColumnIndex);
         String itemDescription = cursor.getString(descriptionColumnIndex);
-        String itemPrice = cursor.getString(priceColumnIndex);
-        String itemQuantity = cursor.getString(quantityColumnIndex);
+        int itemPrice = cursor.getInt(priceColumnIndex);
+        int itemQuantity = cursor.getInt(quantityColumnIndex);
 
         // If the item description is empty string or null, then use some default text
         // that says "Unknown description", so the TextView isn't blank.
@@ -103,8 +103,8 @@ public class ItemCursorAdapter extends CursorAdapter {
         nameTextView.setText(itemName);
         summaryTextView.setText(itemDescription);
         String euro = context.getString(R.string.unit_item_price);
-        priceTextView.setText(itemPrice + euro);
-        quantityTextView.setText(itemQuantity);
+        priceTextView.setText(Integer.toString(itemPrice));
+        quantityTextView.setText(Integer.toString(itemQuantity));
 
         // Find the sale button
         Button saleButton = view.findViewById(R.id.list_item_sale);

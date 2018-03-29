@@ -255,7 +255,6 @@ public class EditorActivity extends AppCompatActivity implements
         boolean isInputOk = validateInputs();
 
         if (isInputOk) {
-            saveItem();
             // save the item here
 
         } else {
