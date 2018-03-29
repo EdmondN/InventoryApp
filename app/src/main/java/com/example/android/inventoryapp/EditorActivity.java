@@ -16,10 +16,8 @@
 package com.example.android.inventoryapp;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
@@ -92,6 +90,13 @@ public class EditorActivity extends AppCompatActivity implements
      * Boolean flag that keeps track of whether the item has been edited (true) or not (false)
      */
     private boolean mItemHasChanged = false;
+
+    private String nameString;
+    private String descriptionString;
+    private String quantityString;
+    private String priceString;
+    private String suppliernameString;
+    private String supplierphoneString;
 
     /**
      * /**
@@ -192,36 +197,59 @@ public class EditorActivity extends AppCompatActivity implements
         });
     }
 
+    // Check if this is supposed to be a new item
+    // and check if all the fields in the editor are blank
+
+    public boolean validateInputs() {
+        int price;
+        price = Integer.parseInt(priceString);
+        if (TextUtils.isEmpty(nameString)) {
+            mNameEditText.setError("The Product Name cannot be blank");
+            return false;
+        }
+        if (price < 0) {
+            mPriceEditText.setError("The Stock Unit Price Cannot be less than Zero");
+            return false;
+        }
+        if (TextUtils.isEmpty(suppliernameString)) {
+            mSupplierNameEditText.setError("The Supplier Name cannot be blank");
+            return false;
+        }
+        if (TextUtils.isEmpty(supplierphoneString)) {
+            mSupplierPhoneEditText.setError("The Supplier Phone cannot be blank");
+            return false;
+        }
+        if (TextUtils.isEmpty(quantityString)) {
+            mQuantityEditText.setError("The Stock Quantity Cannot be less than Zero");
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Get user input from editor and save item into database.
      */
     private void saveItem() {
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
-        String nameString = mNameEditText.getText().toString().trim();
-        String descriptionString = mDescriptionEditText.getText().toString().trim();
-        String quantityString = mQuantityEditText.getText().toString().trim();
-        String priceString = mPriceEditText.getText().toString().trim();
-        String suppliernameString = mSupplierNameEditText.getText().toString().trim();
-        String supplierphoneString = mSupplierPhoneEditText.getText().toString().trim();
+        nameString = mNameEditText.getText().toString().trim();
+        descriptionString = mDescriptionEditText.getText().toString().trim();
+        quantityString = mQuantityEditText.getText().toString().trim();
+        priceString = mPriceEditText.getText().toString().trim();
+        suppliernameString = mSupplierNameEditText.getText().toString().trim();
+        supplierphoneString = mSupplierPhoneEditText.getText().toString().trim();
 
-        // Check if this is supposed to be a new item
-        // and check if all the fields in the editor are blank
-        int price;
-        price = Integer.parseInt(priceString);
-        if (TextUtils.isEmpty(nameString)) {
-            mNameEditText.setError("The Product Name cannot be blank");
-        } else if (price > 0) {
-            mPriceEditText.setError("The Stock Unit Price Cannot be less than Zero");
-        } else if (TextUtils.isEmpty(suppliernameString)) {
-            mSupplierNameEditText.setError("The Supplier Name cannot be blank");
-        } else if (TextUtils.isEmpty(supplierphoneString)) {
-            mSupplierPhoneEditText.setError("The Supplier Phone cannot be blank");
-        } else if (TextUtils.isEmpty(quantityString)) {
-            mQuantityEditText.setError("The Stock Quantity Cannot be less than Zero");
-            // Since no fields were modified, we can return early without creating a new item.
-            // No need to create ContentValues and no need to do any ContentProvider operations.
-        } else {
+        // Since no fields were modified, we can return early without creating a new item.
+        // No need to create ContentValues and no need to do any ContentProvider operations.
+        boolean isInputOk = validateInputs();
+
+        if (isInputOk) {
+            return;
+            // save the item here
+
+        }
+            // some error handling
+
             // Create a ContentValues object where column names are the keys,
             // and item attributes from the editor are the values.
             ContentValues values = new ContentValues();
@@ -250,7 +278,7 @@ public class EditorActivity extends AppCompatActivity implements
             }
             finish();
         }
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
