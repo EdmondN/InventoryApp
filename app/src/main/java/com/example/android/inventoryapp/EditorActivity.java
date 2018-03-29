@@ -16,8 +16,10 @@
 package com.example.android.inventoryapp;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
+import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
@@ -86,12 +88,7 @@ public class EditorActivity extends AppCompatActivity implements
      */
     private EditText mSupplierPhoneEditText;
 
-    /**
-     * Boolean flag that keeps track of whether the item has been edited (true) or not (false)
-     */
-    private boolean mItemHasChanged = false;
-
-    private String nameString;
+    private  String nameString;
     private String descriptionString;
     private String quantityString;
     private String priceString;
@@ -99,21 +96,25 @@ public class EditorActivity extends AppCompatActivity implements
     private String supplierphoneString;
 
     /**
+     * Boolean flag that keeps track of whether the item has been edited (true) or not (false)
+     */
+    private boolean mItemHasChanged = false;
+
+
+    /**
      * /**
      * OnTouchListener that listens for any user touches on a View, implying that they are modifying
      * the view, and we change the mItemHasChanged boolean to true.
      */
     private final View.OnTouchListener mTouchListener = new View.OnTouchListener() {
-        @SuppressLint("ClickableViewAccessibility")
-        @Override
+
         public boolean onTouch(View view, MotionEvent motionEvent) {
             mItemHasChanged = true;
             return false;
         }
     };
 
-    @SuppressLint("ClickableViewAccessibility")
-    @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
@@ -373,7 +374,7 @@ public class EditorActivity extends AppCompatActivity implements
         showUnsavedChangesDialog(discardButtonClickListener);
     }
 
-    @Override
+
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         // Since the editor shows all item attributes, define a projection that contains
         // all columns from the item table
@@ -395,7 +396,7 @@ public class EditorActivity extends AppCompatActivity implements
                 null);                  // Default sort order
     }
 
-    @Override
+
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         // Bail early if the cursor is null or there is less than 1 row in the cursor
         if (cursor == null || cursor.getCount() < 1) {
@@ -432,7 +433,7 @@ public class EditorActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
+
     public void onLoaderReset(Loader<Cursor> loader) {
         // If the loader is invalidated, clear out all the data from the input fields.
         mNameEditText.setText("");
