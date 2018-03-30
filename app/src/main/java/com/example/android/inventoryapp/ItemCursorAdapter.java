@@ -147,7 +147,7 @@ class ItemCursorAdapter extends CursorAdapter {
                     // we want to modify.
                     context.getContentResolver().update(mCurrentItemUri, updateValues, null, null);
                 } else {
-                    Toast.makeText(context, "Item out of stock", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.itemOut, Toast.LENGTH_SHORT).show();
                 }
             }
         });

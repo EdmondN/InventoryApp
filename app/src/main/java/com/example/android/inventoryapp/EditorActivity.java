@@ -182,7 +182,7 @@ public class EditorActivity extends AppCompatActivity implements
                     --quantity;
                     mQuantityEditText.setText(quantity + "");
                 } else {
-                    Toast.makeText(getApplicationContext(), "No Less than 1 Item", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.nolessthan1, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -211,42 +211,42 @@ public class EditorActivity extends AppCompatActivity implements
         supplierphoneString = mSupplierPhoneEditText.getText().toString().trim();
 
         if (TextUtils.isEmpty(nameString)) {
-            mNameEditText.setError("The Product Name cannot be blank");
+            mNameEditText.setError(getString(R.string.productNameBlank));
             return false;
         }
 
         if (TextUtils.isEmpty(descriptionString)) {
-            mDescriptionEditText.setError("The Description cannot be blank");
+            mDescriptionEditText.setError(getString(R.string.descriptionBlank));
             return false;
         }
         if (TextUtils.isEmpty(priceString)) {
-            mPriceEditText.setError("The price may not be empty");
+            mPriceEditText.setError(getString(R.string.priceEmpty));
             return false;
         }
 
         int price;
         price = Integer.parseInt(priceString);
         if (price <= 0) {
-            mPriceEditText.setError("The Stock Unit Price Cannot be less than Zero");
+            mPriceEditText.setError(getString(R.string.unitPriceZero));
             return false;
         }
 
         if (TextUtils.isEmpty(suppliernameString)) {
-            mSupplierNameEditText.setError("The Supplier Name cannot be blank");
+            mSupplierNameEditText.setError(getString(R.string.supplierNameBlank));
             return false;
         }
         if (TextUtils.isEmpty(supplierphoneString)) {
-            mSupplierPhoneEditText.setError("The Supplier Phone cannot be blank");
+            mSupplierPhoneEditText.setError(getString(R.string.supplierPhoneBlank));
             return false;
         }
         if (TextUtils.isEmpty(priceString)) {
-            mPriceEditText.setError("The Quantity may not be empty");
+            mPriceEditText.setError(getString(R.string.emptyQuantity));
             return false;
         }
         int quantity;
         quantity = Integer.parseInt(quantityString);
         if (quantity <= 0) {
-            mQuantityEditText.setError("The Stock Quantity Cannot be less than Zero");
+            mQuantityEditText.setError(getString(R.string.stockQuantityZero));
             return false;
         }
         return true;
