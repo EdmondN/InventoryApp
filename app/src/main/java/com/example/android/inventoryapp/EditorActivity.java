@@ -170,7 +170,11 @@ public class EditorActivity extends AppCompatActivity implements
                 ContentValues values = new ContentValues();
                 int quantity = Integer.parseInt(mQuantityEditText.getText().toString().trim());
                 values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantity + 1);
-                getContentResolver().update(mCurrentItemUri, values, null, null);
+                if (mCurrentItemUri == null) {
+                    getContentResolver().insert(ItemEntry.CONTENT_URI, values);
+                }else {
+                    getContentResolver().update(mCurrentItemUri, values, null, null);
+                }
             }
         });
         //This method is called when the minus button is clicked.*/
@@ -183,7 +187,11 @@ public class EditorActivity extends AppCompatActivity implements
                 } else {
                     Toast.makeText(getApplicationContext(), "No Less than 1 Item", Toast.LENGTH_SHORT).show();
                 }
-                getContentResolver().update(mCurrentItemUri, values, null, null);
+                if (mCurrentItemUri == null) {
+                    getContentResolver().insert(ItemEntry.CONTENT_URI, values);
+                }else {
+                    getContentResolver().update(mCurrentItemUri, values, null, null);
+                }
             }
         });
         FloatingActionButton call = findViewById(R.id.edit_call_phone);
