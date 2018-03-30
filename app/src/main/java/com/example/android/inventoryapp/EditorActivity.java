@@ -87,7 +87,7 @@ public class EditorActivity extends AppCompatActivity implements
      */
     private EditText mSupplierPhoneEditText;
 
-    private  String nameString;
+    private String nameString;
     private String descriptionString;
     private String quantityString;
     private String priceString;
@@ -98,7 +98,6 @@ public class EditorActivity extends AppCompatActivity implements
      * Boolean flag that keeps track of whether the item has been edited (true) or not (false)
      */
     private boolean mItemHasChanged = false;
-
 
     /**
      * /**
@@ -112,7 +111,6 @@ public class EditorActivity extends AppCompatActivity implements
             return false;
         }
     };
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,12 +167,8 @@ public class EditorActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 ContentValues values = new ContentValues();
                 int quantity = Integer.parseInt(mQuantityEditText.getText().toString().trim());
-                values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantity + 1);
-                if (mCurrentItemUri == null) {
-                    getContentResolver().insert(ItemEntry.CONTENT_URI, values);
-                }else {
-                    getContentResolver().update(mCurrentItemUri, values, null, null);
-                }
+                quantity += 1;
+                mQuantityEditText.setText(quantity + "");
             }
         });
         //This method is called when the minus button is clicked.*/
@@ -182,15 +176,11 @@ public class EditorActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 ContentValues values = new ContentValues();
                 int quantity = Integer.parseInt(mQuantityEditText.getText().toString().trim());
-                if (quantity > 1) {
-                    values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantity - 1);
-                } else {
+                if (quantity > 1){
+                --quantity;
+                mQuantityEditText.setText(quantity+"");
+            } else {
                     Toast.makeText(getApplicationContext(), "No Less than 1 Item", Toast.LENGTH_SHORT).show();
-                }
-                if (mCurrentItemUri == null) {
-                    getContentResolver().insert(ItemEntry.CONTENT_URI, values);
-                }else {
-                    getContentResolver().update(mCurrentItemUri, values, null, null);
                 }
             }
         });
@@ -209,15 +199,26 @@ public class EditorActivity extends AppCompatActivity implements
     // and check if all the fields in the editor are blank
 
     public boolean validateInputs() {
+        // Read from input fields
+        // Use trim to eliminate leading or trailing white space
+        nameString = mNameEditText.getText().toString().trim();
+        descriptionString = mDescriptionEditText.getText().toString().trim();
+        quantityString = mQuantityEditText.getText().toString().trim();
+        priceString = mPriceEditText.getText().toString().trim();
+        suppliernameString = mSupplierNameEditText.getText().toString().trim();
+        supplierphoneString = mSupplierPhoneEditText.getText().toString().trim();
 
         if (TextUtils.isEmpty(nameString)) {
             mNameEditText.setError("The Product Name cannot be blank");
             return false;
         }
-        int price;
-        price = Integer.parseInt(priceString);
-        if (price < 0) {
+
+        if (Double.parseDouble(priceString) < 0 || mPriceEditText == null) {
             mPriceEditText.setError("The Stock Unit Price Cannot be less than Zero");
+            return false;
+        }
+        if (TextUtils.isEmpty(descriptionString)) {
+            mDescriptionEditText.setError("The Description cannot be blank");
             return false;
         }
         if (TextUtils.isEmpty(suppliernameString)) {
@@ -239,33 +240,21 @@ public class EditorActivity extends AppCompatActivity implements
      * Get user input from editor and save item into database.
      */
     private void saveItem() {
-        // Read from input fields
-        // Use trim to eliminate leading or trailing white space
-        nameString = mNameEditText.getText().toString().trim();
-        descriptionString = mDescriptionEditText.getText().toString().trim();
-        quantityString = mQuantityEditText.getText().toString().trim();
-        priceString = mPriceEditText.getText().toString().trim();
-        suppliernameString = mSupplierNameEditText.getText().toString().trim();
-        supplierphoneString = mSupplierPhoneEditText.getText().toString().trim();
-
-        // Create a ContentValues object where column names are the keys,
-        // and item attributes from the editor are the values.
-        ContentValues values = new ContentValues();
-        values.put(ItemEntry.COLUMN_ITEM_NAME, nameString);
-        values.put(ItemEntry.COLUMN_ITEM_DESCRIPTION, descriptionString);
-        values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantityString);
-        values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME, suppliernameString);
-        values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE, supplierphoneString);
-        values.put(ItemEntry.COLUMN_ITEM_PRICE, priceString);
 
         // Since no fields were modified, we can return early without creating a new item.
         // No need to create ContentValues and no need to do any ContentProvider operations.
-        boolean isInputOk = validateInputs();
 
-        if (isInputOk) {
-            // save the item here
+        if (validateInputs()) {
+            // Create a ContentValues object where column names are the keys,
+            // and item attributes from the editor are the values.
+            ContentValues values = new ContentValues();
+            values.put(ItemEntry.COLUMN_ITEM_NAME, nameString);
+            values.put(ItemEntry.COLUMN_ITEM_DESCRIPTION, descriptionString);
+            values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantityString);
+            values.put(ItemEntry.COLUMN_ITEM_PRICE, priceString);
+            values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME, suppliernameString);
+            values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE, supplierphoneString);
 
-        } else {
             // some error handling
 
             // If the price is not provided by the user, don't try to parse the string into an
@@ -279,7 +268,7 @@ public class EditorActivity extends AppCompatActivity implements
                 }
             } else {
                 int rowsAffected = getContentResolver().update(mCurrentItemUri, values, null, null);
-                if (rowsAffected == 0) {
+                if (rowsAffected == 1) {
                     Toast.makeText(this, getString(R.string.editor_update_item_successful), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, getString(R.string.editor_update_item_failed), Toast.LENGTH_SHORT).show();
@@ -288,7 +277,6 @@ public class EditorActivity extends AppCompatActivity implements
             finish();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -383,7 +371,6 @@ public class EditorActivity extends AppCompatActivity implements
         showUnsavedChangesDialog(discardButtonClickListener);
     }
 
-
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         // Since the editor shows all item attributes, define a projection that contains
         // all columns from the item table
@@ -404,7 +391,6 @@ public class EditorActivity extends AppCompatActivity implements
                 null,                   // No selection arguments
                 null);                  // Default sort order
     }
-
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         // Bail early if the cursor is null or there is less than 1 row in the cursor
@@ -441,7 +427,6 @@ public class EditorActivity extends AppCompatActivity implements
 
         }
     }
-
 
     public void onLoaderReset(Loader<Cursor> loader) {
         // If the loader is invalidated, clear out all the data from the input fields.

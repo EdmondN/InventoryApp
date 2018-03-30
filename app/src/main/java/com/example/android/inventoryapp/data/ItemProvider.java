@@ -142,19 +142,31 @@ public class ItemProvider extends ContentProvider {
             throw new IllegalArgumentException("Item requires a name");
         }
 
+        String description = values.getAsString(ItemEntry.COLUMN_ITEM_DESCRIPTION);
+        if (description == null) {
+            throw new IllegalArgumentException("Item requires a name");
+        }
         // Check that the quantity is valid
         Integer quantity = values.getAsInteger(ItemEntry.COLUMN_ITEM_QUANTITY);
         if (quantity != null && quantity < 0) {
             throw new IllegalArgumentException("Item requires valid Quantity");
         }
 
-        // If the price is provided, check that it's greater than or equal to 0 kg
+        // If the price is provided, check that it's greater than or equal to 0
         Integer price = values.getAsInteger(ItemEntry.COLUMN_ITEM_PRICE);
         if (price != null && price < 0) {
             throw new IllegalArgumentException("Item requires valid Price");
         }
+        String suppliername = values.getAsString(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME);
+        if (suppliername == null) {
+            throw new IllegalArgumentException("Item requires a Supplier Name");
+        }
+        String supplierphone = values.getAsString(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME);
+        if (supplierphone == null) {
+            throw new IllegalArgumentException("Item requires a Supplier Phone Number");
+        }
 
-        // No need to check the description, any value is valid (including null).
+
 
         // Get writeable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
@@ -199,6 +211,7 @@ public class ItemProvider extends ContentProvider {
      * Return the number of rows that were successfully updated.
      */
     private int updateItem(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+        int rowsUpdated;
         // If the {@link ItemEntry#COLUMN_ITEM_NAME} key is present,
         // check that the name value is not null.
         if (values.containsKey(ItemEntry.COLUMN_ITEM_NAME)) {
@@ -242,18 +255,19 @@ public class ItemProvider extends ContentProvider {
             }
         }
 
-        // No need to check the description, any value is valid (including null).
+
 
         // If there are no values to update, then don't try to update the database
         if (values.size() == 0) {
-            return 0;
+            rowsUpdated = 0;
+            return rowsUpdated;
         }
 
         // Otherwise, get writeable database to update the data
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
         // Perform the update on the database and get the number of rows affected
-        int rowsUpdated = database.update(ItemEntry.TABLE_NAME, values, selection, selectionArgs);
+        rowsUpdated = database.update(ItemEntry.TABLE_NAME, values, selection, selectionArgs);
 
         // If 1 or more rows were updated, then notify all listeners that the data at the
         // given URI has changed
