@@ -15,6 +15,7 @@
  */
 package com.example.android.inventoryapp;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
@@ -106,12 +107,15 @@ public class EditorActivity extends AppCompatActivity implements
      */
     private final View.OnTouchListener mTouchListener = new View.OnTouchListener() {
 
-        public boolean onTouch(View view, MotionEvent motionEvent) {
+
+        @SuppressLint("ClickableViewAccessibility")
+        public boolean onTouch(View v, MotionEvent motionEvent) {
             mItemHasChanged = true;
             return false;
         }
     };
 
+    @SuppressLint("ClickableViewAccessibility")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
@@ -165,7 +169,6 @@ public class EditorActivity extends AppCompatActivity implements
 
         plusButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                ContentValues values = new ContentValues();
                 int quantity = Integer.parseInt(mQuantityEditText.getText().toString().trim());
                 quantity += 1;
                 mQuantityEditText.setText(quantity + "");
@@ -174,12 +177,11 @@ public class EditorActivity extends AppCompatActivity implements
         //This method is called when the minus button is clicked.*/
         minusButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                ContentValues values = new ContentValues();
                 int quantity = Integer.parseInt(mQuantityEditText.getText().toString().trim());
-                if (quantity > 1){
-                --quantity;
-                mQuantityEditText.setText(quantity+"");
-            } else {
+                if (quantity > 1) {
+                    --quantity;
+                    mQuantityEditText.setText(quantity + "");
+                } else {
                     Toast.makeText(getApplicationContext(), "No Less than 1 Item", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -198,7 +200,7 @@ public class EditorActivity extends AppCompatActivity implements
     // Check if this is supposed to be a new item
     // and check if all the fields in the editor are blank
 
-    public boolean validateInputs() {
+    private boolean validateInputs() {
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
         nameString = mNameEditText.getText().toString().trim();
@@ -213,14 +215,22 @@ public class EditorActivity extends AppCompatActivity implements
             return false;
         }
 
-        if (Double.parseDouble(priceString) < 0 || mPriceEditText == null) {
-            mPriceEditText.setError("The Stock Unit Price Cannot be less than Zero");
-            return false;
-        }
         if (TextUtils.isEmpty(descriptionString)) {
             mDescriptionEditText.setError("The Description cannot be blank");
             return false;
         }
+        if (TextUtils.isEmpty(priceString)) {
+            mPriceEditText.setError("The price may not be empty");
+            return false;
+        }
+
+        int price;
+        price = Integer.parseInt(priceString);
+        if (price <= 0) {
+            mPriceEditText.setError("The Stock Unit Price Cannot be less than Zero");
+            return false;
+        }
+
         if (TextUtils.isEmpty(suppliernameString)) {
             mSupplierNameEditText.setError("The Supplier Name cannot be blank");
             return false;
@@ -229,7 +239,13 @@ public class EditorActivity extends AppCompatActivity implements
             mSupplierPhoneEditText.setError("The Supplier Phone cannot be blank");
             return false;
         }
-        if (TextUtils.isEmpty(quantityString)) {
+        if (TextUtils.isEmpty(priceString)) {
+            mPriceEditText.setError("The Quantity may not be empty");
+            return false;
+        }
+        int quantity;
+        quantity = Integer.parseInt(quantityString);
+        if (quantity <= 0) {
             mQuantityEditText.setError("The Stock Quantity Cannot be less than Zero");
             return false;
         }
@@ -254,8 +270,6 @@ public class EditorActivity extends AppCompatActivity implements
             values.put(ItemEntry.COLUMN_ITEM_PRICE, priceString);
             values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME, suppliernameString);
             values.put(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE, supplierphoneString);
-
-            // some error handling
 
             // If the price is not provided by the user, don't try to parse the string into an
             // integer value. Use 0 by default.
@@ -309,8 +323,6 @@ public class EditorActivity extends AppCompatActivity implements
             case R.id.action_save:
                 // Save item to database
                 saveItem();
-                // Exit activity
-                finish();
                 return true;
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:

@@ -22,7 +22,8 @@
         <ImageView
             android:id="@+id/empty_shelter_image"
             android:src="@drawable/inventoryapp"
-            style="@style/emptyImage" />
+            style="@style/emptyImage"
+            android:contentDescription="@string/empty"/>
 
         <TextView
             android:id="@+id/empty_title_text"

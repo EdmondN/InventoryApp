@@ -36,7 +36,7 @@ import com.example.android.inventoryapp.data.ItemContract.ItemEntry;
  * that uses a {@link Cursor} of item data as its data source. This adapter knows
  * how to create list items for each row of item data in the {@link Cursor}.
  */
-public class ItemCursorAdapter extends CursorAdapter {
+class ItemCursorAdapter extends CursorAdapter {
 
     /**
      * Constructs a new {@link ItemCursorAdapter}.
@@ -103,7 +103,7 @@ public class ItemCursorAdapter extends CursorAdapter {
         nameTextView.setText(itemName);
         summaryTextView.setText(itemDescription);
         String euro = context.getString(R.string.unit_item_price);
-        priceTextView.setText(Integer.toString(itemPrice));
+        priceTextView.setText(Integer.toString(itemPrice)+euro);
         quantityTextView.setText(Integer.toString(itemQuantity));
 
         // Find the sale button
@@ -145,7 +145,7 @@ public class ItemCursorAdapter extends CursorAdapter {
                     //content values. Pass in null for the selection and selection args
                     //because mCurrentPhoneUri will already identify the correct row in the database that
                     // we want to modify.
-                    int rowsUpdate = context.getContentResolver().update(mCurrentItemUri, updateValues, null, null);
+                    context.getContentResolver().update(mCurrentItemUri, updateValues, null, null);
                 } else {
                     Toast.makeText(context, "Item out of stock", Toast.LENGTH_SHORT).show();
                 }

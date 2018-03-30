@@ -25,14 +25,14 @@ import com.example.android.inventoryapp.data.ItemContract.ItemEntry;
 /**
  * Database helper for Items app. Manages database creation and version management.
  */
-public class ItemDbHelper extends SQLiteOpenHelper {
+class ItemDbHelper extends SQLiteOpenHelper {
 
-    public static final String LOG_TAG = ItemDbHelper.class.getSimpleName();
+    private static final String LOG_TAG = ItemDbHelper.class.getSimpleName();
 
     /**
      * Name of the database file
      */
-    private static final String DATABASE_NAME = "inventoryapp50.db";
+    private static final String DATABASE_NAME = "inventoryapp.db";
 
     /**
      * Database version. If you change the database schema, you must increment the database version.

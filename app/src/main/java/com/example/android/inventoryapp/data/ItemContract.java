@@ -41,7 +41,7 @@ public final class ItemContract {
      * Use CONTENT_AUTHORITY to create the base of all URI's which apps will use to contact
      * the content provider.
      */
-    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    private static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     /**
      * Possible path (appended to base content URI for possible URI's)
@@ -112,8 +112,6 @@ public final class ItemContract {
         public final static String COLUMN_ITEM_SUPPLIER_NAME = "suppliername";
 
         public final static String COLUMN_ITEM_SUPPLIER_PHONE = "supplierphone";
-
-        public final static String COLUMN_SALE = "saleButton";
 
     }
 

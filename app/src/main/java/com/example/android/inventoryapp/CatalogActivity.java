@@ -49,7 +49,7 @@ public class CatalogActivity extends AppCompatActivity implements
     /**
      * Adapter for the ListView
      */
-    ItemCursorAdapter mCursorAdapter;
+    private ItemCursorAdapter mCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +122,7 @@ public class CatalogActivity extends AppCompatActivity implements
         // Use the {@link ItemEntry#CONTENT_URI} to indicate that we want to insert
         // into the items database table.
         // Receive the new content URI that will allow us to access Toto's data in the future.
-        Uri newUri = getContentResolver().insert(ItemEntry.CONTENT_URI, values);
+       getContentResolver().insert(ItemEntry.CONTENT_URI, values);
     }
 
     /**

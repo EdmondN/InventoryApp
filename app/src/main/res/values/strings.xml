@@ -89,9 +89,6 @@
     <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
     <string name="hint_item_price">Price</string>
 
-    <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
-    <string name="hint_item_quantity">Quantity</string>
-
     <!-- Units for price of the item (euro) [CHAR LIMIT=5] -->
     <string name="unit_item_price">\u20AC</string>
 
@@ -108,5 +105,5 @@
     <string name="plus">+</string>
     <string name="stock">Stock Quantity:</string>
     <string name="test">test</string>
-    <string name="errorFields">Insert All the Fields</string>
+    <string name="empty">empty</string>
 </resources>

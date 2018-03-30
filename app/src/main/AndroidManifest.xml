@@ -5,10 +5,11 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/inventoryapp"
+        android:icon="@drawable/inventoryicon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor">
         <activity
             android:name=".CatalogActivity"
             android:label="@string/app_name">
