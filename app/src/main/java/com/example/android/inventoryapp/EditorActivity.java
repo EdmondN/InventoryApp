@@ -69,27 +69,32 @@ public class EditorActivity extends AppCompatActivity implements
     /**
      * EditText field to enter the item's breed
      */
-    private EditText mDescriptionEditText;
+    @BindView(R.id.edit_item_description) EditText mDescriptionEditText;
 
     /**
      * EditText field to enter the item's price
      */
-    private EditText mPriceEditText;
+    @BindView(R.id.edit_item_price) EditText mPriceEditText;
 
     /**
      * EditText field to enter the item's quantity
      */
-    private EditText mQuantityEditText;
+    @BindView(R.id.quantity_edit_view) EditText mQuantityEditText;
 
     /**
      * EditText field to enter the item's Supplier Name
      */
-    private EditText mSupplierNameEditText;
-
+    @BindView(R.id.edit_item_supplier) EditText mSupplierNameEditText;
     /**
      * EditText field to enter the item's Supplier Name
      */
-    private EditText mSupplierPhoneEditText;
+    @BindView(R.id.edit_item_phone) EditText mSupplierPhoneEditText;
+
+
+    @BindView(R.id.buttonminus) Button mMinusButton ;
+    @BindView(R.id.buttonplus) Button mPlusButton ;
+
+   @BindView(R.id.edit_call_phone) FloatingActionButton call;
 
     private String nameString;
     private String descriptionString;
@@ -150,13 +155,12 @@ public class EditorActivity extends AppCompatActivity implements
 
         // Find all relevant views that we will need to read user input from
         nameString = mNameEditText.getText().toString();
-        mDescriptionEditText = findViewById(R.id.edit_item_description);
-        mQuantityEditText = findViewById(R.id.quantity_edit_view);
-        mPriceEditText = findViewById(R.id.edit_item_price);
-        mSupplierNameEditText = findViewById(R.id.edit_item_supplier);
-        mSupplierPhoneEditText = findViewById(R.id.edit_item_phone);
-        Button minusButton = findViewById(R.id.buttonminus);
-        Button plusButton = findViewById(R.id.buttonplus);
+        descriptionString = mDescriptionEditText.getText().toString();
+        quantityString = mQuantityEditText.getText().toString();
+        priceString = mPriceEditText.getText().toString();
+        suppliernameString = mSupplierNameEditText.getText().toString();
+        supplierphoneString = mSupplierPhoneEditText.getText().toString();
+
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
@@ -167,12 +171,11 @@ public class EditorActivity extends AppCompatActivity implements
         mPriceEditText.setOnTouchListener(mTouchListener);
         mSupplierNameEditText.setOnTouchListener(mTouchListener);
         mSupplierPhoneEditText.setOnTouchListener(mTouchListener);
-        minusButton.setOnTouchListener(mTouchListener);
-        plusButton.setOnTouchListener(mTouchListener);
+
 
         //This method is called when the plus button is clicked.*/
 
-        plusButton.setOnClickListener(new View.OnClickListener() {
+        mPlusButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int quantity = Integer.parseInt(mQuantityEditText.getText().toString().trim());
                 quantity += 1;
@@ -180,7 +183,7 @@ public class EditorActivity extends AppCompatActivity implements
             }
         });
         //This method is called when the minus button is clicked.*/
-        minusButton.setOnClickListener(new View.OnClickListener() {
+        mMinusButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int quantity = Integer.parseInt(mQuantityEditText.getText().toString().trim());
                 if (quantity > 1) {
@@ -191,7 +194,6 @@ public class EditorActivity extends AppCompatActivity implements
                 }
             }
         });
-        FloatingActionButton call = findViewById(R.id.edit_call_phone);
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -212,7 +214,7 @@ public class EditorActivity extends AppCompatActivity implements
     private boolean validateInputs() {
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
-        nameString = mNameEditText.getText().toString().trim();
+        nameString = mNameEditText.getText().toString();
         descriptionString = mDescriptionEditText.getText().toString().trim();
         quantityString = mQuantityEditText.getText().toString().trim();
         priceString = mPriceEditText.getText().toString().trim();
