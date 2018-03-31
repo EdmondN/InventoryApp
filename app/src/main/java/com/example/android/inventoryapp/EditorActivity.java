@@ -40,6 +40,9 @@ import android.widget.Toast;
 
 import com.example.android.inventoryapp.data.ItemContract.ItemEntry;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Allows user to create a new item or edit an existing one.
  */
@@ -61,7 +64,7 @@ public class EditorActivity extends AppCompatActivity implements
     /**
      * EditText field to enter the item's name
      */
-    private EditText mNameEditText;
+    @BindView(R.id.edit_item_name) EditText mNameEditText;
 
     /**
      * EditText field to enter the item's breed
@@ -116,9 +119,11 @@ public class EditorActivity extends AppCompatActivity implements
     };
 
     @SuppressLint("ClickableViewAccessibility")
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
+        ButterKnife.bind(this);
+
 
         // Examine the intent that was used to launch this activity,
         // in order to figure out if we're creating a new item or editing an existing one.
@@ -144,7 +149,7 @@ public class EditorActivity extends AppCompatActivity implements
         }
 
         // Find all relevant views that we will need to read user input from
-        mNameEditText = findViewById(R.id.edit_item_name);
+        nameString = mNameEditText.getText().toString();
         mDescriptionEditText = findViewById(R.id.edit_item_description);
         mQuantityEditText = findViewById(R.id.quantity_edit_view);
         mPriceEditText = findViewById(R.id.edit_item_price);
