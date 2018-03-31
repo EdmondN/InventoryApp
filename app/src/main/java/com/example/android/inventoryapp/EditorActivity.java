@@ -190,8 +190,12 @@ public class EditorActivity extends AppCompatActivity implements
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phone = mSupplierPhoneEditText.getText().toString().trim();
-                Intent intentCall = new Intent(Intent.ACTION_DIAL, Uri.fromParts(PHONE, phone, null));
+                supplierphoneString = mSupplierPhoneEditText.getText().toString().trim();
+                if (TextUtils.isEmpty(supplierphoneString)) {
+                    mSupplierPhoneEditText.setError(getString(R.string.supplierPhoneBlank));
+                    return;
+                }
+                Intent intentCall = new Intent(Intent.ACTION_DIAL, Uri.fromParts(PHONE, supplierphoneString, null));
                 startActivity(intentCall);
             }
         });
@@ -231,22 +235,22 @@ public class EditorActivity extends AppCompatActivity implements
             return false;
         }
 
-        if (TextUtils.isEmpty(suppliernameString)) {
-            mSupplierNameEditText.setError(getString(R.string.supplierNameBlank));
-            return false;
-        }
-        if (TextUtils.isEmpty(supplierphoneString)) {
-            mSupplierPhoneEditText.setError(getString(R.string.supplierPhoneBlank));
-            return false;
-        }
-        if (TextUtils.isEmpty(priceString)) {
-            mPriceEditText.setError(getString(R.string.emptyQuantity));
+        if (TextUtils.isEmpty(quantityString)) {
+            mQuantityEditText.setError(getString(R.string.emptyQuantity));
             return false;
         }
         int quantity;
         quantity = Integer.parseInt(quantityString);
         if (quantity <= 0) {
             mQuantityEditText.setError(getString(R.string.stockQuantityZero));
+            return false;
+        }
+        if (TextUtils.isEmpty(suppliernameString)) {
+            mSupplierNameEditText.setError(getString(R.string.supplierNameBlank));
+            return false;
+        }
+        if (TextUtils.isEmpty(supplierphoneString)) {
+            mSupplierPhoneEditText.setError(getString(R.string.supplierPhoneBlank));
             return false;
         }
         return true;
