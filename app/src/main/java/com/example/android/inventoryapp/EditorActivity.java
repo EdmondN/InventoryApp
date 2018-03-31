@@ -64,37 +64,45 @@ public class EditorActivity extends AppCompatActivity implements
     /**
      * EditText field to enter the item's name
      */
-    @BindView(R.id.edit_item_name) EditText mNameEditText;
+    @BindView(R.id.edit_item_name)
+    EditText mNameEditText;
 
     /**
      * EditText field to enter the item's breed
      */
-    @BindView(R.id.edit_item_description) EditText mDescriptionEditText;
+    @BindView(R.id.edit_item_description)
+    EditText mDescriptionEditText;
 
     /**
      * EditText field to enter the item's price
      */
-    @BindView(R.id.edit_item_price) EditText mPriceEditText;
+    @BindView(R.id.edit_item_price)
+    EditText mPriceEditText;
 
     /**
      * EditText field to enter the item's quantity
      */
-    @BindView(R.id.quantity_edit_view) EditText mQuantityEditText;
+    @BindView(R.id.quantity_edit_view)
+    EditText mQuantityEditText;
 
     /**
      * EditText field to enter the item's Supplier Name
      */
-    @BindView(R.id.edit_item_supplier) EditText mSupplierNameEditText;
+    @BindView(R.id.edit_item_supplier)
+    EditText mSupplierNameEditText;
     /**
      * EditText field to enter the item's Supplier Name
      */
-    @BindView(R.id.edit_item_phone) EditText mSupplierPhoneEditText;
+    @BindView(R.id.edit_item_phone)
+    EditText mSupplierPhoneEditText;
 
+    @BindView(R.id.buttonminus)
+    Button mMinusButton;
+    @BindView(R.id.buttonplus)
+    Button mPlusButton;
 
-    @BindView(R.id.buttonminus) Button mMinusButton ;
-    @BindView(R.id.buttonplus) Button mPlusButton ;
-
-   @BindView(R.id.edit_call_phone) FloatingActionButton call;
+    @BindView(R.id.edit_call_phone)
+    FloatingActionButton call;
 
     private String nameString;
     private String descriptionString;
@@ -115,7 +123,6 @@ public class EditorActivity extends AppCompatActivity implements
      */
     private final View.OnTouchListener mTouchListener = new View.OnTouchListener() {
 
-
         @SuppressLint("ClickableViewAccessibility")
         public boolean onTouch(View v, MotionEvent motionEvent) {
             mItemHasChanged = true;
@@ -128,7 +135,6 @@ public class EditorActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
         ButterKnife.bind(this);
-
 
         // Examine the intent that was used to launch this activity,
         // in order to figure out if we're creating a new item or editing an existing one.
@@ -161,7 +167,6 @@ public class EditorActivity extends AppCompatActivity implements
         suppliernameString = mSupplierNameEditText.getText().toString();
         supplierphoneString = mSupplierPhoneEditText.getText().toString();
 
-
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
         // or not, if the user tries to leave the editor without saving.
@@ -171,7 +176,6 @@ public class EditorActivity extends AppCompatActivity implements
         mPriceEditText.setOnTouchListener(mTouchListener);
         mSupplierNameEditText.setOnTouchListener(mTouchListener);
         mSupplierPhoneEditText.setOnTouchListener(mTouchListener);
-
 
         //This method is called when the plus button is clicked.*/
 

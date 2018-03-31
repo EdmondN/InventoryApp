@@ -33,7 +33,6 @@ import com.example.android.inventoryapp.data.ItemContract.ItemEntry;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * {@link ItemCursorAdapter} is an adapter for a list or grid view
@@ -42,14 +41,17 @@ import butterknife.Unbinder;
  */
 class ItemCursorAdapter extends CursorAdapter {
 
-    @BindView(R.id.list_item_sale) Button saleButton ;
+    @BindView(R.id.list_item_sale)
+    Button saleButton;
     // Find individual views that we want to modify in the list item layout
-    @BindView(R.id.name) TextView nameTextView ;
-    @BindView(R.id.summary) TextView summaryTextView ;
-    @BindView(R.id.product_price) TextView priceTextView ;
-    @BindView(R.id.quantity) TextView quantityTextView ;
-
-
+    @BindView(R.id.name)
+    TextView nameTextView;
+    @BindView(R.id.summary)
+    TextView summaryTextView;
+    @BindView(R.id.product_price)
+    TextView priceTextView;
+    @BindView(R.id.quantity)
+    TextView quantityTextView;
 
     /**
      * Constructs a new {@link ItemCursorAdapter}.
@@ -60,7 +62,6 @@ class ItemCursorAdapter extends CursorAdapter {
     public ItemCursorAdapter(Context context, Cursor c) {
         super(context, c, 0 /* flags */);
     }
-
 
     /**
      * Makes a new blank list item view. No data is set (or bound) to the views yet.
@@ -114,9 +115,8 @@ class ItemCursorAdapter extends CursorAdapter {
         nameTextView.setText(itemName);
         summaryTextView.setText(itemDescription);
         String euro = context.getString(R.string.unit_item_price);
-        priceTextView.setText(Integer.toString(itemPrice)+euro);
+        priceTextView.setText(Integer.toString(itemPrice) + euro);
         quantityTextView.setText(Integer.toString(itemQuantity));
-
 
         // Get the position before the button is clicked
         final int position = cursor.getPosition();

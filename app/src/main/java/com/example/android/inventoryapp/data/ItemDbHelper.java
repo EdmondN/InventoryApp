@@ -22,8 +22,6 @@ import android.util.Log;
 
 import com.example.android.inventoryapp.data.ItemContract.ItemEntry;
 
-import butterknife.ButterKnife;
-
 /**
  * Database helper for Items app. Manages database creation and version management.
  */

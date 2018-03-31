@@ -12,8 +12,6 @@ import android.util.Log;
 
 import com.example.android.inventoryapp.data.ItemContract.ItemEntry;
 
-import butterknife.ButterKnife;
-
 /**
  * {@link ContentProvider} for Items app.
  */

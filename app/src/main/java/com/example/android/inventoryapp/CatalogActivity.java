@@ -44,11 +44,14 @@ import butterknife.ButterKnife;
 public class CatalogActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
-    @BindView(R.id.fab) FloatingActionButton fab;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
     // Find the ListView which will be populated with the item data
-    @BindView(R.id.list) ListView itemListView;
+    @BindView(R.id.list)
+    ListView itemListView;
 
-    @BindView(R.id.empty_view) View emptyView;
+    @BindView(R.id.empty_view)
+    View emptyView;
     /**
      * Identifier for the item data loader
      */
@@ -126,7 +129,7 @@ public class CatalogActivity extends AppCompatActivity implements
         // Use the {@link ItemEntry#CONTENT_URI} to indicate that we want to insert
         // into the items database table.
         // Receive the new content URI that will allow us to access Toto's data in the future.
-       getContentResolver().insert(ItemEntry.CONTENT_URI, values);
+        getContentResolver().insert(ItemEntry.CONTENT_URI, values);
     }
 
     /**
