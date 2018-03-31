@@ -107,13 +107,13 @@
     <string name="test">test</string>
     <string name="empty">empty</string>
     <string name="nolessthan1">No Less than 1 Item</string>
-    <string name="productNameBlank">The Product Name cannot be blank</string>
-    <string name="descriptionBlank">The Description cannot be blank</string>
-    <string name="priceEmpty">The price may not be empty</string>
+    <string name="productNameBlank">The Product Name Cannot be Blank</string>
+    <string name="descriptionBlank">The Description Cannot be Blank</string>
+    <string name="priceEmpty">The price may not be Empty</string>
     <string name="unitPriceZero">The Stock Unit Price Cannot be less than Zero</string>
-    <string name="supplierNameBlank">The Supplier Name cannot be blank</string>
-    <string name="supplierPhoneBlank">The Supplier Phone cannot be blank</string>
-    <string name="emptyQuantity">The Quantity may not be empty</string>
+    <string name="supplierNameBlank">The Supplier Name Cannot be Blank</string>
+    <string name="supplierPhoneBlank">The Supplier Phone Cannot be Blank</string>
+    <string name="emptyQuantity">The Quantity may not be Empty</string>
     <string name="stockQuantityZero">The Stock Quantity Cannot be less than Zero</string>
     <string name="itemOut">Item out of stock</string>
 </resources>
