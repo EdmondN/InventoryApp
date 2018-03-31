@@ -166,8 +166,6 @@ public class ItemProvider extends ContentProvider {
             throw new IllegalArgumentException("Item requires a Supplier Phone Number");
         }
 
-
-
         // Get writeable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
@@ -254,8 +252,6 @@ public class ItemProvider extends ContentProvider {
                 throw new IllegalArgumentException("Item requires valid Phone Number");
             }
         }
-
-
 
         // If there are no values to update, then don't try to update the database
         if (values.size() == 0) {
