@@ -31,12 +31,25 @@ import android.widget.Toast;
 
 import com.example.android.inventoryapp.data.ItemContract.ItemEntry;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * {@link ItemCursorAdapter} is an adapter for a list or grid view
  * that uses a {@link Cursor} of item data as its data source. This adapter knows
  * how to create list items for each row of item data in the {@link Cursor}.
  */
 class ItemCursorAdapter extends CursorAdapter {
+
+    @BindView(R.id.list_item_sale) Button saleButton ;
+    // Find individual views that we want to modify in the list item layout
+    @BindView(R.id.name) TextView nameTextView ;
+    @BindView(R.id.summary) TextView summaryTextView ;
+    @BindView(R.id.product_price) TextView priceTextView ;
+    @BindView(R.id.quantity) TextView quantityTextView ;
+
+
 
     /**
      * Constructs a new {@link ItemCursorAdapter}.
@@ -47,6 +60,7 @@ class ItemCursorAdapter extends CursorAdapter {
     public ItemCursorAdapter(Context context, Cursor c) {
         super(context, c, 0 /* flags */);
     }
+
 
     /**
      * Makes a new blank list item view. No data is set (or bound) to the views yet.
@@ -59,6 +73,7 @@ class ItemCursorAdapter extends CursorAdapter {
      */
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
+
         // Inflate a list item view using the layout specified in list_item.xml
         return LayoutInflater.from(context).inflate(R.layout.list_item, parent, false);
     }
@@ -75,11 +90,7 @@ class ItemCursorAdapter extends CursorAdapter {
      */
     @Override
     public void bindView(View view, final Context context, final Cursor cursor) {
-        // Find individual views that we want to modify in the list item layout
-        TextView nameTextView = view.findViewById(R.id.name);
-        TextView summaryTextView = view.findViewById(R.id.summary);
-        TextView priceTextView = view.findViewById(R.id.product_price);
-        TextView quantityTextView = view.findViewById(R.id.quantity);
+        ButterKnife.bind(this, view);
 
         // Find the columns of ITEM attributes that we're interested in
         int nameColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_NAME);
@@ -106,8 +117,6 @@ class ItemCursorAdapter extends CursorAdapter {
         priceTextView.setText(Integer.toString(itemPrice)+euro);
         quantityTextView.setText(Integer.toString(itemQuantity));
 
-        // Find the sale button
-        Button saleButton = view.findViewById(R.id.list_item_sale);
 
         // Get the position before the button is clicked
         final int position = cursor.getPosition();

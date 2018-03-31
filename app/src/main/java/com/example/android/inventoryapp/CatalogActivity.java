@@ -35,12 +35,20 @@ import android.widget.ListView;
 
 import com.example.android.inventoryapp.data.ItemContract.ItemEntry;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Displays list of items that were entered and stored in the app.
  */
 public class CatalogActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
+    @BindView(R.id.fab) FloatingActionButton fab;
+    // Find the ListView which will be populated with the item data
+    @BindView(R.id.list) ListView itemListView;
+
+    @BindView(R.id.empty_view) View emptyView;
     /**
      * Identifier for the item data loader
      */
@@ -55,9 +63,9 @@ public class CatalogActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog);
+        ButterKnife.bind(this);
 
         // Setup FAB to open EditorActivity
-        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,11 +74,7 @@ public class CatalogActivity extends AppCompatActivity implements
             }
         });
 
-        // Find the ListView which will be populated with the item data
-        ListView itemListView = findViewById(R.id.list);
-
         // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
-        View emptyView = findViewById(R.id.empty_view);
         itemListView.setEmptyView(emptyView);
 
         // Setup an Adapter to create a list item for each row of item data in the Cursor.
