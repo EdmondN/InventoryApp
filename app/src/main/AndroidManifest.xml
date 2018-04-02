@@ -21,6 +21,7 @@
         <activity
             android:name=".EditorActivity"
             android:theme="@style/EditorTheme"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".CatalogActivity" >
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
