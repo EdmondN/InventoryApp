@@ -144,7 +144,7 @@ public class ItemProvider extends ContentProvider {
 
         String description = values.getAsString(ItemEntry.COLUMN_ITEM_DESCRIPTION);
         if (description == null) {
-            throw new IllegalArgumentException("Item requires a name");
+            throw new IllegalArgumentException("Item requires a Description");
         }
         // Check that the quantity is valid
         Integer quantity = values.getAsInteger(ItemEntry.COLUMN_ITEM_QUANTITY);
