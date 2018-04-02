@@ -161,7 +161,7 @@ public class ItemProvider extends ContentProvider {
         if (suppliername == null) {
             throw new IllegalArgumentException("Item requires a Supplier Name");
         }
-        String supplierphone = values.getAsString(ItemEntry.COLUMN_ITEM_SUPPLIER_NAME);
+        String supplierphone = values.getAsString(ItemEntry.COLUMN_ITEM_SUPPLIER_PHONE);
         if (supplierphone == null) {
             throw new IllegalArgumentException("Item requires a Supplier Phone Number");
         }
